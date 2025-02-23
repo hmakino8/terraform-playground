@@ -1,0 +1,20 @@
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# Variables file
+terraform.tfvars
+*.auto.tfvars
+
+# Backup files
+*.bak
+
+# Private key files
+*.pem
+*.key
+
+# Terraform plugin directory
+.terraform/
+
+# Crash log
+crash.log
