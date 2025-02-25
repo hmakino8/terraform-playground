@@ -3,7 +3,6 @@ provider "aws" {
   region = "ap-northeast-1"
 }
 
-/*
 # VPCリソース
 resource "aws_vpc" "terra_vpc" {
   cidr_block = "10.0.0.0/16"
@@ -18,4 +17,3 @@ resource "aws_subnet" "terra_subnet" {
 
   cidr_block = "10.0.0.0/24"
 }
-*/
