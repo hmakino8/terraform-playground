@@ -3,13 +3,11 @@ variable "env" {
   default = "handson2"
 }
 
-variable "ssh_ip" {
-  description = "SSH接続許可IP"
-  type        = string
-}
+# variable "ssh_ip" {
+#   type = string
+# }
 
-variable "ssh_key_path" {
-  description = "sshパス"
-  type        = string
-}
+# variable "ssh_key_path" {
+#   type = string
+# }
 
