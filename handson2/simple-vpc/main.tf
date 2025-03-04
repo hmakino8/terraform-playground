@@ -113,7 +113,8 @@ resource "aws_security_group" "simple_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    # cidr_blocks = [var.ssh_ip]  // DWSのプロキシ経由に設定したいが、そのままだとブロックされる
+    cidr_blocks = ["0.0.0.0/0"] // ブロックされるので、とりあえず0.0.0.0/0に設定
   }
 
   # アウトバウンドのトラフィックルール
