@@ -1,0 +1,19 @@
+{
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": false,
+  "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-django-template"],
+  "tailwindConfig": "./tailwind.config.js",
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "django-html-template",
+        "printWidth": 100,
+        "singleQuote": false,
+        "djangoIndentAfterBlock": true
+      }
+    }
+  ]
+}

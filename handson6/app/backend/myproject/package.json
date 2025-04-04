@@ -1,0 +1,24 @@
+{
+  "name": "myproject",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tailwindcss -i ./static/css/tailwind.css -o ./static/css/output.css",
+    "dev": "npx tailwindcss -i ./static/css/tailwind.css -o ./static/css/output.css --watch",
+    "format": "prettier --write \"./**/*.{html,css,js,json}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "prettier": "^3.4.2",
+    "prettier-plugin-django": "^0.5.18",
+    "prettier-plugin-django-template": "^0.1.1",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "tailwindcss": "^3.4.16"
+  }
+}

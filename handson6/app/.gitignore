@@ -1,0 +1,45 @@
+# python
+*.pyc
+__pycache__
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info
+dist
+
+# django
+*.sqlite3
+media
+staticfiles
+
+#node.js
+node_modules/
+
+# env
+*.env
+
+# venv
+venv
+myvenv
+
+# os, tmp
+Thumbs.db
+.idea
+.vscode
+*.swp
+*.swo
+
+# production
+build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
