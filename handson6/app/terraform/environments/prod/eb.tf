@@ -129,7 +129,7 @@ resource "aws_elastic_beanstalk_environment" "mycafe_prod" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "DJANGO_DEBUG"
-    value     = "False"
+    value     = "True"
   }
 
   setting {

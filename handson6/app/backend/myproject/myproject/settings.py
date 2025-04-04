@@ -71,15 +71,17 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-  "https://*.amplifyapp.com",
-  "http://localhost:3000",
+    "https://*.amplifyapp.com",
+    "http://localhost:3000",
+    "https://*.elasticbeanstalk.com",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
-  "https://*.amplifyapp.com",
-  "http://localhost:3000",
+    "https://*.amplifyapp.com",
+    "http://localhost:3000",
+    "https://*.elasticbeanstalk.com",
 ]
 
 AUTHENTICATION_BACKENDS = [
