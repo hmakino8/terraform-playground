@@ -1,6 +1,6 @@
 variable "env" {
   type    = string
-  default = "handson4"
+  default = "handson2"
 }
 
 variable "db_username" {
@@ -10,5 +10,6 @@ variable "db_username" {
 
 variable "db_password" {
   type      = string
+  default   = "test1234"
   sensitive = true # パスワードをログに表示しない
 }

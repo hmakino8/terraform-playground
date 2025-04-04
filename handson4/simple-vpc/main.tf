@@ -276,3 +276,103 @@ resource "aws_db_instance" "mysql" {
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.rds.name
 }
+
+# terraform showの結果を記載
+resource "aws_instance" "tmp" {
+  ami = "ami-0599b6e53ca798bb2"
+  # arn                         = "arn:aws:ec2:ap-northeast-1:977099018596:instance/i-031473f9eda7d7c1b"
+  associate_public_ip_address = false
+  availability_zone           = "ap-northeast-1c"
+  # cpu_core_count                       = 1
+  # cpu_threads_per_core                 = 1
+  disable_api_stop        = false
+  disable_api_termination = false
+  ebs_optimized           = false
+  get_password_data       = false
+  hibernation             = false
+  # host_id                              = [90mnull[0m[0m
+  # iam_instance_profile                 = [90mnull[0m[0m
+  # id                                   = "i-031473f9eda7d7c1b"
+  instance_initiated_shutdown_behavior = "stop"
+  # instance_lifecycle                   = [90mnull[0m[0m
+  # instance_state     = "running"
+  instance_type = "t2.micro"
+  # ipv6_address_count = 0
+  # ipv6_addresses = []
+  key_name   = "test-ec2-key"
+  monitoring = false
+  # outpost_arn                          = [90mnull[0m[0m
+  # password_data                        = [90mnull[0m[0m
+  # placement_group                      = [90mnull[0m[0m
+  placement_partition_number = 0
+  # primary_network_interface_id = "eni-042f01b2bc637d952"
+  # private_dns                  = "ip-172-31-47-247.ap-northeast-1.compute.internal"
+  private_ip = "172.31.47.247"
+  # public_dns                           = [90mnull[0m[0m
+  # public_ip                            = [90mnull[0m[0m
+  secondary_private_ips = []
+  security_groups       = []
+  source_dest_check     = true
+  # spot_instance_request_id             = [90mnull[0m[0m
+  subnet_id = "subnet-0d8e2644f387621aa"
+  tags = {
+    "Name" = "tmp"
+  }
+  tags_all = {
+    "Name" = "tmp"
+  }
+  tenancy = "default"
+  vpc_security_group_ids = [
+    "sg-02e759756f409820b",
+  ]
+
+  capacity_reservation_specification {
+    capacity_reservation_preference = "open"
+  }
+
+  cpu_options {
+    # amd_sev_snp      = [90mnull[0m[0m
+    core_count       = 1
+    threads_per_core = 1
+  }
+
+  credit_specification {
+    cpu_credits = "standard"
+  }
+
+  enclave_options {
+    enabled = false
+  }
+
+  maintenance_options {
+    auto_recovery = "default"
+  }
+
+  metadata_options {
+    http_endpoint               = "enabled"
+    http_protocol_ipv6          = "disabled"
+    http_put_response_hop_limit = 2
+    http_tokens                 = "required"
+    instance_metadata_tags      = "disabled"
+  }
+
+  private_dns_name_options {
+    enable_resource_name_dns_a_record    = false
+    enable_resource_name_dns_aaaa_record = false
+    hostname_type                        = "ip-name"
+  }
+
+  root_block_device {
+    delete_on_termination = true
+    # device_name           = "/dev/xvda"
+    encrypted = false
+    iops      = 3000
+    # kms_key_id            = [90mnull[0m[0m
+    tags       = {}
+    tags_all   = {}
+    throughput = 125
+    # volume_id   = "vol-0f46b7596fc035186"
+    volume_size = 8
+    volume_type = "gp3"
+  }
+}

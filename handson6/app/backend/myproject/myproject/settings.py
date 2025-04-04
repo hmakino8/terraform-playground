@@ -123,7 +123,7 @@ if 'RDS_HOSTNAME' in os.environ:
       'ENGINE': 'django.db.backends.postgresql',
       'NAME': os.environ['RDS_DB_NAME'],
       'USER': os.environ['RDS_USERNAME'],
-      'PASSEORD': os.environ['RDS_PASSWORD'],
+      'PASSWORD': os.environ['RDS_PASSWORD'],
       'HOST': os.environ['RDS_HOSTNAME'],
       'PORT': os.environ['RDS_PORT'],
     }

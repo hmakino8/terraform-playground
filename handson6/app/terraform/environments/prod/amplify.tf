@@ -5,27 +5,28 @@ resource "aws_amplify_app" "frontend" {
 
   build_spec = <<-EOT
     version: 1
-    frontend:
-      phases:
-        preBuild:
-          commands:
-            - cd app/frontend
-            - npm ci
-        build:
-          commands:
-            - npm run build
-      artifacts:
-        baseDirectory: app/frontend/.next
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - node_modules/**/*
+    applications:
+      - frontend:
+          phases:
+            preBuild:
+              commands:
+                - cd app/frontend
+                - npm ci
+            build:
+              commands:
+                - npm run build
+          artifacts:
+            baseDirectory: app/frontend/.next
+            files:
+              - '**/*'
+          cache:
+            paths:
+              - app/frontend/node_modules/**/*
   EOT
 
   # バックエンドAPIのURLを環境変数として設定
   environment_variables = {
-    NEXT_PUBLIC_API_URL = "https://${aws_elastic_beanstalk_environment.deicafe_prod.cname}/api"
+    NEXT_PUBLIC_API_URL = "https://${aws_elastic_beanstalk_environment.mycafe_prod.cname}/api"
   }
 
   tags = local.tags

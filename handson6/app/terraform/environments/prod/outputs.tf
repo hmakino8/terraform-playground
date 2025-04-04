@@ -1,6 +1,6 @@
 output "elastic_beanstalk_url" {
   description = "URL of the Elastic Beanstalk environment"
-  value       = "https://${aws_elastic_beanstalk_environment.deicafe_prod.cname}"
+  value       = "https://${aws_elastic_beanstalk_environment.mycafe_prod.cname}"
 }
 
 output "amplify_default_domain" {

@@ -17,3 +17,9 @@ crash.log
 
 # Terraform lock file (optional)
 *.terraform.lock.hcl
+
+# Aws Cli
+*.pkg
+*.zip
+sessionmanager-bundle/
+

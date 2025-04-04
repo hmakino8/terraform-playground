@@ -60,7 +60,7 @@ resource "aws_iam_role_policy_attachment" "eb_service" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkService"
 }
 
-resource "aws_elastic_beanstalk_environment" "deicafe_prod" {
+resource "aws_elastic_beanstalk_environment" "mycafe_prod" {
   name                = "${local.name_prefix}-env"
   application         = aws_elastic_beanstalk_application.deicafe.name
   solution_stack_name = "64bit Amazon Linux 2023 v4.5.0 running Python 3.11"
