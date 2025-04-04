@@ -30,17 +30,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# env keyで呼び出すように変更しておく
-SECRET_KEY = 'django-insecure-1=udt1jsfg3e7pb&!)qj93$glh%p7tji_abs3d+h3wwdm8_lk^'
+# 環境変数から設定を読み込む
+# 第二引数はデフォルト値でDjangoが自動生成した開発用のシークレットキー. 本番環境では使用すべきでない.
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-1=udt1jsfg3e7pb&!)qj93$glh%p7tji_abs3d+h3wwdm8_lk^')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+  '.elasticbeanstalk.com',
+  'localhost',
+  '127.0.0.1',
+  os.environ.get('ALLOWED_HOST', ''),
+]
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +56,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'rest_framework',
     'corsheaders',
+    'storages', # S3へ静的ファイルをアップロードするためのアプリ
 ]
 
 MIDDLEWARE = [
@@ -66,12 +71,14 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
+  "https://*.amplifyapp.com",
   "http://localhost:3000",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
+  "https://*.amplifyapp.com",
   "http://localhost:3000",
 ]
 
@@ -110,12 +117,38 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
+if 'RDS_HOSTNAME' in os.environ:
+  DATABASES = {
+    'default': {
+      'ENGINE': 'django.db.backends.postgresql',
+      'NAME': os.environ['RDS_DB_NAME'],
+      'USER': os.environ['RDS_USERNAME'],
+      'PASSEORD': os.environ['RDS_PASSWORD'],
+      'HOST': os.environ['RDS_HOSTNAME'],
+      'PORT': os.environ['RDS_PORT'],
+    }
+  }
+else:
+  DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
+  }
+
+# S3設定(静的ファイル用)
+if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
+  AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+  AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'ap-northeast-1')
+  AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+  
+  # 静的ファイルの設定
+  STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+  STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+else:
+  # 開発用の静的ファイル設定
+  STATIC_URL = '/static/'
+  STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 # Password validation
