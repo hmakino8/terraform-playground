@@ -12,16 +12,10 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // リダイレクト設定を追加
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/user',
-        permanent: true,
-      },
-    ]
-  }
+  // リダイレクトを削除し、デフォルトページを設定
+  trailingSlash: true,
+  // 静的エクスポート時にindex.htmlを生成
+  generateIndexPages: true
 };
 
 export default nextConfig;
