@@ -3,6 +3,7 @@ import { signupFormData } from "@/user/config";
 import type { ValidationErrors } from "@/user/types";
 import { useUIState } from "@/user/hooks/useUIState";
 import { POPUP } from "@/user/constants";
+import { apiClient } from "@/user/api/commonApi";
 
 export const useSignup = () => {
   const { setPopUp, handleScreenTransition } = useUIState();
@@ -26,27 +27,16 @@ export const useSignup = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+      const csrfResponse = await apiClient.get("/get-csrf-token/");
+      const { csrfToken } = csrfResponse.data;
 
-      const csrfResponse = await fetch(
-        `${API_URL}/get-csrf-token/`,
-        {
-          credentials: "include",
-        }
-      );
-      const { csrfToken } = await csrfResponse.json();
-
-      const response = await fetch("http://localhost:8000/api/signup/", {
-        method: "POST",
+      const response = await apiClient.post("/signup/", formValues, {
         headers: {
-          "Content-Type": "application/json",
           "X-CSRFToken": csrfToken,
         },
-        body: JSON.stringify(formValues),
-        credentials: "include",
       });
 
-      const data: ValidationErrors = await response.json();
+      const data: ValidationErrors = await response.data;
       console.log(data);
 
       if (response.ok) {
