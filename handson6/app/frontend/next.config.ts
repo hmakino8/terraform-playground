@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   optimizeFonts: false,
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true,
   },
   devIndicators: {
     appIsrStatus: false,
