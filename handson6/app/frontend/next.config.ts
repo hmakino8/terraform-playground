@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  output: 'npx serve@latest out',
   experimental: {
     // optimizeCss: true,
   },
