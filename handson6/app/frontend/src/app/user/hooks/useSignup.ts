@@ -26,8 +26,10 @@ export const useSignup = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+
       const csrfResponse = await fetch(
-        "http://localhost:8000/api/get-csrf-token/",
+        `${API_URL}/get-csrf-token/`,
         {
           credentials: "include",
         }
