@@ -33,20 +33,18 @@ export const useSignup = () => {
       const response = await apiClient.post("/signup/", formValues, {
         headers: {
           "X-CSRFToken": csrfToken,
-        },
+        }
       });
-
-      const data: ValidationErrors = await response.data;
-      console.log(data);
 
       if (response.status === 200) {
         handleScreenTransition("Login");
         setPopUp(POPUP.signup);
       } else {
         const errorMessages: ValidationErrors = {};
+        const data = response.data as ValidationErrors;
 
         for (const [field, errors] of Object.entries(data)) {
-          errorMessages[field] = errors;
+          errorMessages[field] = errors as string[];
         }
         if (formValues.password != formValues.password_confirm) {
           errorMessages["password_confirm"] = ["パスワードが一致していません"];
