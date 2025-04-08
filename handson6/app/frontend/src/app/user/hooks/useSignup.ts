@@ -39,7 +39,7 @@ export const useSignup = () => {
       const data: ValidationErrors = await response.data;
       console.log(data);
 
-      if (response.ok) {
+      if (response.status === 200) {
         handleScreenTransition("Login");
         setPopUp(POPUP.signup);
       } else {
